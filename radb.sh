@@ -1,5 +1,15 @@
 #!/bin/sh
 
+##################################
+# Diretorios
+##################################
+RepositorioTmp="./TMP"
+
+##################################
+# Se diretorio não existir cria
+##################################
+[ ! -d "${RepositorioTmp}" ] && mkdir "${RepositorioTmp}"
+
 echo -n "Qual a rede : " ; read V_Rede
 if [ ! "${V_Rede}" ]
 then
@@ -43,6 +53,6 @@ fi
 while [ "${V_sub}" -le "${V_subf}" ]
 do
 	V_dest=`echo "${V_desc} ${V_Rede} ${V_sub}" | sed 's/\./_/g;s/\//_/g;s/\ /_/g'`
-	sipcalc -S -"${V_ipv46}" "${V_Rede}" --v${V_ipv46}split="${V_sub}" | awk -v V_sub="${V_sub}" -v V_desc="${V_desc}" -v V_as="${V_as}" '$1 ~ /Network/ {print " route:",$3"/"V_sub"\n","descr:",V_desc"\n","origin:","AS"V_as"\n"}' > "${V_dest}.txt"
+	sipcalc -S -"${V_ipv46}" "${V_Rede}" --v${V_ipv46}split="${V_sub}" | awk -v V_sub="${V_sub}" -v V_desc="${V_desc}" -v V_as="${V_as}" '$1 ~ /Network/ {print " route:",$3"/"V_sub"\n","descr:",V_desc"\n","origin:","AS"V_as"\n"}' > "${RepositorioTmp}/${V_dest}.txt"
 	V_sub=`echo "${V_sub} + 1" | bc | sed 's/\ //g'`
 done
