@@ -3,21 +3,20 @@
 ##################################
 # Diretorios
 ##################################
-V_Dir="/opt/WanGuard"
+V_Dir="./WanGuard"
 
 ##################################
 # Se diretorio não existir cria
 ##################################
 [ ! -d "${V_Dir}" ] && mkdir "${V_Dir}"
 
-cd "${V_Dir}"
-
 ##################################
 # Variavies do script
 ##################################
-V_txt="${V_Dir}/opennic.txt"
+V_txt4="${V_Dir}/opennicV4.txt"
+V_txt6="${V_Dir}/opennicV6.txt"
 V_msn="${V_Data} - OPENNIC"
-V_mailto="to@email.com"
+V_mailto="to@mail.net"
 V_Data=`date "+%Y%m%d"`
 V_DT=`date "+%Y"`
 
@@ -41,16 +40,11 @@ F_Opennic(){
 # Executa rotinas
 ##################################
 
-F_Opennic | F_grep_ipv4 | awk '(NR == 1) {printf "dst ip "$1} ; (NR > 1) {printf " or dst ip "$1}' > "${V_txt}"
+F_Opennic | F_grep_ipv4 | awk '(NR == 1) {printf "dst ip "$1} ; (NR > 1) {printf " or dst ip "$1}' > "${V_txt4}"
 
-echo "Dados IPV4 para inclusão nos filtros do WanGuard ..." | mutt -a "${V_txt}" -s "${V_msn}" -- "${V_mailto}"
+echo "Dados IPV4 para inclusão nos filtros do WanGuard ..." | mutt -a "${V_txt4}" -s "${V_msn}" -- "${V_mailto}"
 
-rm -f "${V_txt}"
 
-F_Opennic | F_grep_ipv6 | uniq | awk '(NR == 1) {printf "dst ip "$1} ; (NR > 1) {printf " or dst ip "$1}' > "${V_txt}"
+F_Opennic | F_grep_ipv6 | uniq | awk '(NR == 1) {printf "dst ip "$1} ; (NR > 1) {printf " or dst ip "$1}' > "${V_txt6}"
 
-echo "Dados IPV6 para inclusão nos filtros do WanGuard ..." | mutt -a "${V_txt}" -s "${V_msn}" -- "${V_mailto}"
-
-rm -f "${V_txt}"
-
-cd -
+echo "Dados IPV6 para inclusão nos filtros do WanGuard ..." | mutt -a "${V_txt6}" -s "${V_msn}" -- "${V_mailto}"
