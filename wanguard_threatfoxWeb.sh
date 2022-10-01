@@ -26,7 +26,7 @@ F_grep_ipv4(){
 	grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' | sort -h | uniq
 }
 
-F_ThreatfoxWeb(){
+F_Links(){
         links -ssl.certificates 0 -dump "https://threatfox.abuse.ch/browse/"
 }
 
@@ -34,7 +34,7 @@ F_ThreatfoxWeb(){
 # Executa rotinas
 ##################################
 
-F_ThreatfoxWeb | awk '($2 != "" ) {print $2}' | F_grep_ipv4 | awk '(NR == 1) {printf "dst ip "$1} ; (NR > 1) {printf " or dst ip "$1}' > "${V_txt4}_"
+F_Links | awk '($2 != "" ) {print $2}' | F_grep_ipv4 | awk '(NR == 1) {printf "dst ip "$1} ; (NR > 1) {printf " or dst ip "$1}' > "${V_txt4}_"
 
 
 V_Dom=`F_ThreatfoxWeb | awk '($2 != "" ) {print $2}' | grep "http.://" | cut -f3 -d/ | grep -vE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' | cut -f1 -d: | sort -h | uniq`
