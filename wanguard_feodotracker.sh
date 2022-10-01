@@ -14,7 +14,6 @@ V_Dir="./WanGuard"
 # Variavies do script
 ##################################
 V_txt4="${V_Dir}/opennicV4.txt"
-V_txt6="${V_Dir}/opennicV6.txt"
 V_msn="${V_Data} - FEODOTRACKER"
 V_mailto="to@mail.net"
 V_Data=`date "+%Y%m%d"`
