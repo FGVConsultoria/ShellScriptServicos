@@ -8,4 +8,6 @@ Projeto voltado para arquivar os scripts desenvolvidos para serviços da rede.
 
 4. wanguard_feodotracker.sh - Cria o arquivo com os dados do site "https://feodotracker.abuse.ch" padronizado para os filtros do WanGuard, Feodo Tracker é um projecto de abuso.ch com o objetivo de compartilhar botnet C&C servidores associados com Dridex, Emotet (aka Heodo), TrickBot, QakBot (aka QuakBot / Qbot) e BazarLoader (aka BazarBackdoor). Ele oferece várias listas de bloqueio, ajudando os proprietários da rede para proteger seus usuários de Dridex e Emotet/Heodo.
 
-5. wanguard_dshield.sh - Cria o arquivo com os dados do site "https://www.dshield.org" padronizado para os filtros do WanGuard,Dshield é uma de bloqueios recomendado, resume os top 20 origens de ataque a classe C (/24) e suas sub-redes nos últimos três dias.
+5. wanguard_dshield.sh - Cria o arquivo com os dados do site "https://www.dshield.org" padronizado para os filtros do WanGuard, Dshield é uma lista de bloqueios recomendado, resume os top 20 origens de ataque a classe C (/24) e suas sub-redes nos últimos três dias.
+
+6. wanguard_dan.sh - Cria o arquivo com os dados do site "https://www.dan.me.uk" padronizado para os filtros do WanGuard, DAN é uma lista completa tor node.
